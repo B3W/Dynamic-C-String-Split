@@ -28,9 +28,9 @@
  * @param   str    C-string to split
  * @param   delim  Delimiter to split string on
  * @return  Array of C-strings containing all string tokens in order
- *          which they were split
+ *          which they were split terminated by NULL
  */
-char **strsplit(char *str, const char *delim)
+char **strsplt(char *str, const char *delim)
 {
   size_t arrSz = 2;    /* Keep track of array size -> modifiable */
   size_t arrIndex = 0; /* Keep track of location in array */
@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
   size_t index = 0;
   char **splitArr;
 
-  if(!(splitArr = strsplit(msg, delim))) {
+  if(!(splitArr = strsplt(msg, delim))) {
     exit(EXIT_FAILURE);
   }
 
