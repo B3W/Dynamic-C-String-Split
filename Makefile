@@ -1,10 +1,11 @@
 CC = gcc
 RM = rm -f
+BIN = strsplt
 
 CFLAGS = -Wall -Werror -ggdb
 
-strsplit: strsplit.c
-	@$(CC) strsplit.c $(CFLAGS) -o strsplit
+strsplt: strsplt.c
+	@$(CC) strsplt.c $(CFLAGS) -o $(BIN)
 
 clean:
-	@$(RM) strsplit *~
+	@$(RM) $(BIN)
