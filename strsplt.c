@@ -36,6 +36,7 @@ char **strsplt(char *str, const char *delim)
   size_t arrIndex = 0; /* Keep track of location in array */
   char **spltArr;      /* Array holding split string */
   char **reallocBuf;   /* For making sure no leak w/realloc */
+  char *sPtr;          /* Pointer for context in strtok_r call */
 
   // Allocate space for split string array
   if(!(spltArr = malloc(arrSz * sizeof(*spltArr)))) {
@@ -44,7 +45,7 @@ char **strsplt(char *str, const char *delim)
   }
 
   // Populate first index of array before loop to avoid seg fault
-  spltArr[arrIndex] = strtok(str, delim);
+  spltArr[arrIndex] = strtok_r(str, delim, &sPtr);
   
   // Split until end of string
   while(spltArr[arrIndex] != NULL) {
@@ -62,7 +63,7 @@ char **strsplt(char *str, const char *delim)
       }
       spltArr = reallocBuf;
     }
-    spltArr[arrIndex] = strtok(NULL, delim);
+    spltArr[arrIndex] = strtok_r(NULL, delim, &sPtr);
   }
   return spltArr;
 }
@@ -73,7 +74,7 @@ char **strsplt(char *str, const char *delim)
 int main(int argc, char *argv[])
 {
   const char delim[2] = " ";
-  char msg[] = "Dynamically split this string w/ strsplit!";
+  char msg[] = "Dynamically split this string w/ strsplt!";
   size_t index = 0;
   char **splitArr;
 
